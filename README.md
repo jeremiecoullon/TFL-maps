@@ -1,7 +1,2 @@
-#Creating unified data APIs for Rijkswaterstaat
-
-<img src="Tom.png" width='200px'>
-
-fdsf
-
-<img src="Jeremie_circle.png" width='200px'>
+##Unified data APIs for Rijkswaterstaat
+_Illustrates that clear, consistent, and well-documented data APIs make using data fun!_
