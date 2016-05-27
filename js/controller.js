@@ -1,8 +1,16 @@
 app = angular.module("myApp", []);
 app.controller("myController", function($scope, $http){
+// workaround to pass 'this' to getBicycles function
+var that = this;
 
-  // [-16548.616623740658, 6718833.895524063]
-  // bike position [-0.15380859374999997, 51.4796723781634]
+// user defined radius for finding bike stations. Default is 1000
+this.user = {
+  radius: 1000
+}
+
+// this.register = function() {
+//    console.log('User input: ', this.user.radius);
+// };
 
   // var bike_pos = [-0.15380859374999997, 51.4796723781634]
   // var openlayer_coor = ol.proj.transform(bike_pos, 'EPSG:4326', 'EPSG:3857'); // from TFL to openlayers3
@@ -46,15 +54,18 @@ app.controller("myController", function($scope, $http){
     })
   });
 
-
   function getBicycles(latlon){
+    // console.log(latlon);
 
-    console.log(latlon);
+    console.log('user-selected radius: ',that.user.radius);
+
+
+// original string: '&radius=1000&app_id=&app_key='
 
     // Simple GET request example:
     $http({
       method: 'GET',
-      url: 'https://api.tfl.gov.uk/BikePoint?lat=' + latlon[1] + '&lon=' + latlon[0] + '&radius=1000&app_id=&app_key='
+      url: 'https://api.tfl.gov.uk/BikePoint?lat=' + latlon[1] + '&lon=' + latlon[0] + '&radius=' + that.user.radius + '&app_id=&app_key='
     }).then(function successCallback(response) {
       var features = [];
       for(var i = 0; i < response.data.places.length; i++){
@@ -62,7 +73,7 @@ app.controller("myController", function($scope, $http){
 
         var openlayer_coor = ol.proj.transform([response.data.places[i].lon,response.data.places[i].lat], 'EPSG:4326', 'EPSG:3857'); // from TFL to openlayers3
 
-        console.log(openlayer_coor);
+        // console.log(openlayer_coor);
 
         var f = new ol.Feature({
           geometry: new ol.geom.Point(openlayer_coor),
@@ -75,7 +86,7 @@ app.controller("myController", function($scope, $http){
 
       }
 
-      console.log(features);
+      // console.log(features);
 
       var vc = new ol.source.Vector({
         features: features
@@ -90,57 +101,11 @@ app.controller("myController", function($scope, $http){
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
-      console.log(response.data.places);
+      // console.log(response.data.places);
       // called asynchronously if an error occurs
       // or server returns response with an error status.
     });
   }
-
-  // // Simple GET request example:
-  // $http({
-  //   method: 'GET',
-  //   url: 'https://api.tfl.gov.uk/BikePoint?lat=51.518036696751295&lon=-0.1078033447265625&radius=10000&app_id=&app_key='
-  // }).then(function successCallback(response) {
-  //   var features = [];
-  //   for(var i = 0; i < response.data.places.length; i++){
-  //
-  //     console.log(response.data.places[i].lon);
-  //     console.log(response.data.places[i].lat);
-  //
-  //     var openlayer_coor = ol.proj.transform([response.data.places[i].lon,response.data.places[i].lat], 'EPSG:4326', 'EPSG:3857'); // from TFL to openlayers3
-  //
-  //     console.log(openlayer_coor);
-  //
-  //     var f = new ol.Feature({
-  //       geometry: new ol.geom.Point(openlayer_coor),
-  //       name: 'Null Island',
-  //       population: 4000,
-  //       rainfall: 500
-  //     });
-  //
-  //     features.push(f);
-  //
-  //   }
-  //
-  //   console.log(features);
-  //
-  //   var vc = new ol.source.Vector({
-  //     features: features
-  //   });
-  //
-  //   var vl = new ol.layer.Vector({
-  //     source: vc
-  //   });
-  //
-  //   vectorSource.addFeatures(features);
-  //
-  //   // this callback will be called asynchronously
-  //   // when the response is available
-  // }, function errorCallback(response) {
-  //   console.log(response.data.places);
-  //   // called asynchronously if an error occurs
-  //   // or server returns response with an error status.
-  // });
 
   $scope.map.addLayer(vectorLayer);
   $scope.map.on('click', function(evt) {
@@ -150,9 +115,9 @@ app.controller("myController", function($scope, $http){
     var lat = lonlat[1];
 
     var openlayer_coor = ol.proj.transform(lonlat, 'EPSG:4326', 'EPSG:3857'); // from TFL to openlayers3
-    console.log(evt.coordinate);
-    console.log(lonlat);
-    console.log(openlayer_coor);
+    // console.log(evt.coordinate);
+    // console.log(lonlat);
+    // console.log(openlayer_coor);
 
     getBicycles(lonlat);
 

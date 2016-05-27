@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Can I haz bikes</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol-debug.css" rel="stylesheet">
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
@@ -12,9 +12,33 @@
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol-debug.js"></script>
   </head>
+<style media="screen">
+  .header_style{
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+  }
+  body{
+    background-color: #F5F5F5;
+  }
+</style>
   <body>
 
-<div ng-app="myApp" ng-controller="myController">
+<div >
+
+  <h2 class="header_style">
+    Find bike stations in a circle around any location. Choose the radius !
+  </p>
+
+
+</form>
+</div>
+
+
+<div ng-app="myApp" ng-controller="myController as ctrl">
+  <form name="myForm" ng-submit="ctrl.register()">
+    Choose radius (in meters): <input type="text" ng-model="ctrl.user.radius" style="margin-bottom:10px">
+    <input type="submit" value="Select">
 
   <div id="map"></div>
 </div>
