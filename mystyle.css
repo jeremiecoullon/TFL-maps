@@ -20,10 +20,24 @@ h1,h2,h3{
   margin-top: 25px;
   text-align: center;
 }
-button{
+.download_pdf{
+  margin-top: 80px;
+  text-align: center;
+}
+#page_header{
+  border-bottom: 1px solid black;
+}
+h1{
+  padding-top: 40px;
+  margin-bottom: 22px;
+  font-size: 40px;
+  text-align: center
+  }
+
+button, a{
   color: #861212;
 }
-button:hover{
+button:hover, a:hover{
   color: red;
   text-decoration: none;
 }

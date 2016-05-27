@@ -9,8 +9,9 @@ app.controller("myController", function($scope, $http){
   // console.log(openlayer_coor)
 
   // get marker on the map
+  // HACK: commented out he location of the initial point so it doesn't show on the map
   var iconFeature = new ol.Feature({
-    geometry: new ol.geom.Point([-9841.267391716443, 6713525.105043945]),
+    // geometry: new ol.geom.Point([-9841.267391716443, 6713525.105043945]),
     name: 'Null Island',
     population: 4000,
     rainfall: 500
