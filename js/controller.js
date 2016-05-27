@@ -45,6 +45,7 @@ app.controller("myController", function($scope, $http){
     })
   });
 
+
   function getBicycles(latlon){
 
     console.log(latlon);
