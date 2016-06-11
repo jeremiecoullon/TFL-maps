@@ -3,4 +3,4 @@ _Illustrates that clear, consistent, and well-documented data APIs make using da
 
 Check it out at http://jeremiecoullon.github.io/TFL-maps/
 
-(note: this was done super quickly in half a day at a hackathon..)
+(note: this was done in half a day at a hackathon..)
